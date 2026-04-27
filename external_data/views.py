@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import io
 import urllib, base64
 from django.shortcuts import render
+from django.http import JsonResponse
 
 #Słownik z miastami i ich współrzędnymi (wybrałem: Gdynia, Gdańsk, Warszawa, Kraków):
 
@@ -93,3 +94,46 @@ def json_placeholder_view(request):
 
     except Exception as e:
         return render(request, 'external_data/error.html', {'error': str(e)})
+
+
+def weather_summary_api(request):
+    """
+    Mój własny endpoint API, który pobiera surowe dane z Open-Meteo,
+    agreguje je (liczy średnią) i zwraca gotowy raport w formacie JSON.
+    """
+    #Współrzędne Gdyni
+    url = "https://api.open-meteo.com/v1/forecast?latitude=54.5189&longitude=18.5305&hourly=temperature_2m"
+
+    try:
+        response = requests.get(url)
+        data = response.json()
+
+        # OBRÓBKA DANYCH (Agregacja):
+        # Pobieram temperatury na najbliższe 24h
+        temps = data['hourly']['temperature_2m'][:24]
+
+        #Obliczam statystyki
+        avg_temp = sum(temps) / len(temps)
+        max_temp = max(temps)
+        min_temp = min(temps)
+
+        #Tworze własną strukturę odpowiedzi JSON
+        report = {
+            'metadata': {
+                'city': 'Gdynia',
+                'provider': 'Moja Aplikacja Django - Lab 3',
+                'description': 'Dobowa analiza temperatury'
+            },
+            'stats': {
+                'average_temp': round(avg_temp, 2),
+                'max_temp': max_temp,
+                'min_temp': min_temp,
+                'unit': 'Celsius'
+            },
+            'raw_data_preview': temps[:5]  #Pokazuje próbkę surowych danych
+        }
+
+        return JsonResponse(report)  #Zwracam "czyste" dane, nie stronę HTML
+
+    except Exception as e:
+        return JsonResponse({'status': 'error', 'message': str(e)}, status=500)

@@ -1,14 +1,21 @@
 Projekt lokalnej aplikacji blogowej stworzonej w ramach przedmiotu: Integracja Systemów Informatycznych.
 
-## Funkcjonalności
+## Funkcjonalności - "moduł blogowy (Lab 2)"
 - **System Postów:** Dodawanie, edycja i usuwanie wpisów przez Panel Admina.
 - **Statusy:** Rozróżnienie między szkicem a opublikowanym postem.
 - **Nowoczesny UI:** Responsywny interfejs zbudowany na Bootstrap 5 ze stylami CSS.
 - **Testy Jednostkowe:** Zestaw testów sprawdzających poprawność modeli i widoków.
 - **CI (Continuous Integration):** Automatyczne sprawdzanie kodu przez GitHub Actions przy każdym wypchnięciu zmian.
 
+### Moduł Integracji API (Lab 3)
+- **Open-Meteo Integration:** Dynamiczne pobieranie pogody dla Gdyni i innych (wybranych) miast Polski.
+- **Wizualizacja danych:** Generowanie wykresów temperatury na 24h przy użyciu biblioteki **Matplotlib**.
+- **JSON Data Processing:** Pobieranie i transformacja danych z JSONPlaceholder (filtrowanie, statystyki długości treści).
+- **Własny Endpoint API:** Punkt dostępowy zwracający zagregowane dane pogodowe w formacie JSON.
+
 ## Technologie
 - Python / Django 
 - Bootstrap 5 / Google Fonts
 - SQLite (Baza lokalna)
+- Matplotlib (wizualizacja), Requests (pobieranie danych)
 - Git / GitHub Actions

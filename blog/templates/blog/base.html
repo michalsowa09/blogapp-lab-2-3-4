@@ -95,6 +95,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/admin">Panel Admina</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'weather_page' %}">Pogoda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'json_stats' %}">Statystyki globlane</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-warning" href="{% url 'weather_api' %}" target="_blank">Własne API (JSON)</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -115,7 +124,7 @@
     </div>
 
     <footer class="text-center py-5 text-muted">
-        <p>&copy; Wykonał Michał Sowa, grp.235IC_A1 - na Laboratorium nr 2 - System Blogowy</p>
+        <p>&copy; Wykonał Michał Sowa, grp.235IC_A1 - na Laboratorium nr 2 i 3 - System Blogowy</p>
     </footer>
 
     <!-- Bootstrap JS (dodatkowo - potrzebny do nawigacji na telefonie) -->

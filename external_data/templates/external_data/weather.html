@@ -1,0 +1,29 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+<div class="card shadow-sm p-4">
+    <h2 class="mb-4">Integracja z Open-Meteo API</h2>
+
+    <!-- Formularz wyboru miasta -->
+    <form method="get" class="mb-4 d-flex gap-2">
+        <select name="city" class="form-select w-auto">
+            {% for city in cities %}
+                <option value="{{ city }}" {% if city == selected_city %}selected{% endif %}>{{ city }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-primary">Sprawdź pogodę</button>
+    </form>
+
+    {% if error %}
+        <div class="alert alert-danger">Błąd: {{ error }}</div>
+    {% else %}
+        <div class="text-center">
+            <h3>Miasto: <strong>{{ selected_city }}</strong></h3>
+            <p class="display-5 text-primary">{{ current_temp }}°C</p>
+            <hr>
+            <h4 class="mt-4">Wizualizacja danych (wykres):</h4>
+            <img src="data:image/png;base64,{{ chart }}" class="img-fluid border rounded shadow-sm" alt="Wykres temperatury">
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

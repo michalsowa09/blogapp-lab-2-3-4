@@ -65,3 +65,31 @@ def weather_view(request):
 
     except Exception as e:
         return render(request, 'external_data/weather.html', {'error': str(e)})
+
+
+def json_placeholder_view(request):
+    url = "https://jsonplaceholder.typicode.com/posts"
+
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        data = response.json()  # To są posty pobrane z internetu
+
+        # OBRÓBKA DANYCH (Wymaganie laboratorium):
+        # 1. Filtrowanie: biorę tylko posty użytkownika o ID = 1 (z 100 dostępnych)
+        user_1_posts = [p for p in data if p['userId'] == 1]
+
+        # 2. Statystyki: Liczę średnią długość tytułu dla WSZYSTKICH postów z API
+        total_posts = len(data)
+        avg_title_len = sum(len(p['title']) for p in data) / total_posts
+
+        context = {
+            'external_posts': user_1_posts[:5],  #Pokaże 5 postów usera nr 1
+            'total_api_posts': total_posts,
+            'avg_title_length': round(avg_title_len, 2),
+            'user_id': 1
+        }
+        return render(request, 'external_data/json_data.html', context)
+
+    except Exception as e:
+        return render(request, 'external_data/error.html', {'error': str(e)})

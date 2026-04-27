@@ -1,0 +1,44 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+<div class="card shadow-sm p-4">
+    <h2 class="mb-4">Integracja z JSONPlaceholder API</h2>
+
+    <div class="alert alert-info">
+        Pobrano dane z zewnętrznego serwisu: <code>jsonplaceholder.typicode.com</code>
+    </div>
+
+    <!-- Sekcja statystyk -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card border-primary text-center p-3">
+                <h5 class="text-primary">Wszystkich postów w API</h5>
+                <p class="display-6 fw-bold">{{ total_api_posts }}</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card border-success text-center p-3">
+                <h5 class="text-success">Śr. długość tytułu (wszystkie)</h5>
+                <p class="display-6 fw-bold">{{ avg_title_length }} znaki</p>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <h4 class="mt-4">Posty przefiltrowane (tylko Użytkownik ID: {{ user_id }})</h4>
+    <p class="text-muted small">Wyświetlam 5 pierwszych wyników po obróbce danych.</p>
+
+    <div class="list-group mt-3">
+        {% for post in external_posts %}
+            <div class="list-group-item list-group-item-action border-start border-primary border-4 mb-2 shadow-sm rounded">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1 text-dark fw-bold">{{ post.title|capfirst }}</h5>
+                    <span class="badge bg-secondary">User ID: {{ post.userId }}</span>
+                </div>
+                <p class="mb-1 text-secondary">{{ post.body }}</p>
+                <small class="text-muted">Globalny Post ID: {{ post.id }}</small>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

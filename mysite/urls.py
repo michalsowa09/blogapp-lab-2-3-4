@@ -20,5 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')), #ta linia mówi: "idź do blog/urls.py"
-path('external/', include('external_data.urls')), #Nowe laboratorium
+    path('external/', include('external_data.urls')), #Nowe laboratorium
 ]

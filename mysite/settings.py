@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -74,13 +75,27 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+#Sprawdzam, czy zmienna DB_HOST jest ustawiona (to się dzieje tylko w dockerze):
+if os.environ.get("BD_HOST"):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.environ.get("DB_NAME"),
+            "USER": os.environ.get("DB_USER"),
+            "PASSOWRD": os.environ.get("DB_PASS"),
+            "HOST": os.environ.get("DB_HOST"),
+            "PORT": "5432"
+        }
     }
-}
-
+else:
+    #Ustawienie domyślne dla pracy lokalnej bez Dockera:
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    DATABASES = {
+            "default": {
+                "ENGINE": "django.db.backends.sqlite3",
+                "NAME": BASE_DIR / "db.sqlite3",
+            }
+        }
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators

@@ -13,9 +13,16 @@ Projekt lokalnej aplikacji blogowej stworzonej w ramach przedmiotu: Integracja S
 - **JSON Data Processing:** Pobieranie i transformacja danych z JSONPlaceholder (filtrowanie, statystyki długości treści).
 - **Własny Endpoint API:** Punkt dostępowy zwracający zagregowane dane pogodowe w formacie JSON.
 
+### Moduł Konteneryzacji (Lab 4)
+- **Pełna izolacja:** Aplikacja przygotowana do pracy w kontenerach Docker.
+- **Orkiestracja:** Wykorzystanie Docker Compose do zarządzania stosem technologicznym.
+- **Profesjonalna baza danych:** Przejście z SQLite na PostgreSQL.
+
+
 ## Technologie
 - Python / Django 
 - Bootstrap 5 / Google Fonts
-- SQLite (Baza lokalna)
+- SQLite (Baza lokalna), PostgreSQL
 - Matplotlib (wizualizacja), Requests (pobieranie danych)
 - Git / GitHub Actions
+- Docker, Docker Compose

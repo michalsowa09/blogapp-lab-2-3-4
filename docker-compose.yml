@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  #baza danych: PostgreSQL:
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postrgesql/data
+    environment:
+      - POSTGRES_DB=django_db
+      - POSTGRES_USER=django_user
+      - POSTGRES_PASSWORD=django_pass
+
+  #Serwis(kontener) mojego bloga
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=django_db
+      - DB_USER=django_user
+      - DB_PASS=django_pass
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+
+volumes:
+  postgres_data:

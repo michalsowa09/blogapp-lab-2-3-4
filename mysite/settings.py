@@ -76,13 +76,13 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 #Sprawdzam, czy zmienna DB_HOST jest ustawiona (to się dzieje tylko w dockerze):
-if os.environ.get("BD_HOST"):
+if os.environ.get("DB_HOST"):
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
+            'ENGINE': 'django.db.backends.postgresql',
             'NAME': os.environ.get("DB_NAME"),
             "USER": os.environ.get("DB_USER"),
-            "PASSOWRD": os.environ.get("DB_PASS"),
+            "PASSWORD": os.environ.get("DB_PASS"),
             "HOST": os.environ.get("DB_HOST"),
             "PORT": "5432"
         }

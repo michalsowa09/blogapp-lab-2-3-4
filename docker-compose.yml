@@ -5,7 +5,7 @@ services:
   db:
     image: postgres:15
     volumes:
-      - postgres_data:/var/lib/postrgesql/data
+      - postgres_data:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=django_db
       - POSTGRES_USER=django_user

@@ -48,7 +48,7 @@ jobs:
       - name: Trigger Render Deploy
         run: curl -s ${{ secrets.RENDER_DEPLOY_HOOK }}
 
-    verify:
+  verify:
       needs: deploy
       runs-on: ubuntu-latest
       steps:

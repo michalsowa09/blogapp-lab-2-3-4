@@ -26,5 +26,3 @@ Projekt lokalnej aplikacji blogowej stworzonej w ramach przedmiotu: Integracja S
 - Matplotlib (wizualizacja), Requests (pobieranie danych)
 - Git / GitHub Actions
 - Docker, Docker Compose
-
--Losowy tekst

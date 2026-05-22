@@ -18,6 +18,13 @@ Projekt lokalnej aplikacji blogowej stworzonej w ramach przedmiotu: Integracja S
 - **Orkiestracja:** Wykorzystanie Docker Compose do zarządzania stosem technologicznym.
 - **Profesjonalna baza danych:** Przejście z SQLite na PostgreSQL.
 
+### Automatyzacja CI/CD (Lab 5)
+- **GitHub Actions:** Zautomatyzowany potok sprawdzający jakość kodu.
+- **Linter (flake8):** Automatyczna kontrola stylu i składni Pythona.
+- **Unit Testing:** Zestaw testów jednostkowych uruchamianych w chmurze przy każdym pushu.
+- **Auto-Deploy:** Automatyczne wdrożenie na platformę **Render (PaaS)** po pomyślnym przejściu testów.
+- **Cache:** Optymalizacja szybkości budowania potoku CI.
+
 
 ## Technologie
 - Python / Django 
@@ -26,3 +33,4 @@ Projekt lokalnej aplikacji blogowej stworzonej w ramach przedmiotu: Integracja S
 - Matplotlib (wizualizacja), Requests (pobieranie danych)
 - Git / GitHub Actions
 - Docker, Docker Compose
+- Render

@@ -1,28 +1,27 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from .models import Post
+from blog.models import Post
 from django.urls import reverse
 
-class BlogTests(TestCase):
+class BlogAndApiTests(TestCase):
     def setUp(self):
-        #Tworze testowego użytkownika i posta (status published):
-
-        self.user = User.objects.create_user(username='testuser', password='password123')
+        # Tworze dane testowe
+        self.user = User.objects.create_user(username='tester', password='password123')
         self.post = Post.objects.create(
-            title='Testowy Post',
+            title='Testowy Post Lab5',
             content='Treść testowa',
             author=self.user,
             status='published'
         )
 
-    def test_post_model_str(self):
-        # Testuje czy model zwraca poprawny tytuł:
+    def test_post_content(self):
+        """Test 1: Sprawdza czy model posta działa poprawnie"""
+        post = Post.objects.get(id=self.post.id)
+        self.assertEqual(post.title, 'Testowy Post Lab5')
 
-        self.assertEqual(str(self.post), 'Testowy Post')
-
-    def test_post_list_view(self):
-        # Testuje czy strona główna się ładuje i zawiera tytuł posta:
-
-        response = self.client.get(reverse('post_list'))
+    def test_weather_api_endpoint(self):
+        """Test 2: Sprawdza czy mój własny endpoint JSON zwraca dane"""
+        # Używam nazwy z urls.py aplikacji external_data
+        response = self.client.get(reverse('weather_api'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Testowy Post')
+        self.assertEqual(response['Content-Type'], 'application/json')

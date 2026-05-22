@@ -39,3 +39,22 @@ jobs:
     - name: Run Unit Tests
       run: |
         python manage.py test
+
+  deploy:
+    needs: test # Tylko jeśli testy przejdą na zielono!
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' # Tylko przy pushu do głównej gałęzi
+    steps:
+      - name: Trigger Render Deploy
+        run: curl -s ${{ secrets.RENDER_DEPLOY_HOOK }}
+
+    verify:
+      needs: deploy
+      runs-on: ubuntu-latest
+      steps:
+        - name: Wait for deployment
+          run: sleep 60 # Czekam chwilę, aż serwer się odświeży
+        - name: Sanity Check (Status 200 OK)
+          run: |
+            
+            curl -f https://isi-django-hub.onrender.com/ || exit 1

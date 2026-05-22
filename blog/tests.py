@@ -8,7 +8,7 @@ class BlogAndApiTests(TestCase):
         # Tworze dane testowe
         self.user = User.objects.create_user(username='tester', password='password123')
         self.post = Post.objects.create(
-            title='BŁĄD',
+            title='Testowy Post Lab5',
             content='Treść testowa',
             author=self.user,
             status='published'
